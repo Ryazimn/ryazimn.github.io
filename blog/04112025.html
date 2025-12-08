@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+    
+<head>
+    <title>Blog</title>
+    <meta charset="UTF-8">
+    <link href="../styles.css" rel="stylesheet" type="text/css"/>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <address>
+            <a href="../index.html">Home</a>
+            <hr>
+        </address>
+        <p><i>April 11, 2025</i></p>
+        <h2>Solution to <a href="https://open.kattis.com/problems/piecesofparentheses">North American Invitational Programming Contest Problem A</a></h2>
+        <h3>Problem description</h3>
+        <p>
+            You are given a list of \(n\) bracket sequences \(s_1,\dots,s_n\). Find the maximum length of balanced bracket sequence you can make by concatenating some of them in some order. You can use each string at most once.
+        </p>
+        <h3>Constraints</h3>
+        <p>
+            \(1\leq n\leq 300\), \(1\leq |s_i|\leq 300\)
+        </p>
+        <h3>Analysis</h3>
+        <p>
+            We start by noting the every bracket sequence an be classified to two kinds. By removing the substrings that are regular, the sequence will be of the form \()))\cdots )(\cdots (((\), that is, each string can be encoded into a triple \((a_i,b_i,c_i)\), where \(a_i\) is the number of closing bracket in the above form, \(b_i\) is the number of opening bracket in the above form, and \(c_i\) is the length of the original string.
+        </p>
+        <p>
+            To maximize the total length of the string, notice that strings with \(a_i=0\) should always be in the prefix, and strings with \(b_i=0\) should be in the suffix. For the rest of the strings, we should order them so that strings with \(a_i>b_i\) should always comes after strings with \(a_i < b_i\).
+        </p>
+        <p>
+            Now sort the strings in this order, we only need to calculate a subsequence that satisfies the condition that the sum of \(c_i\) is maximized and the number of opening and closing bracket are equal. This can be done with knapsack dynamic programming, by maintaining the maximum sum of \(c_i\) for each possible positive value of \(\sum_{i\in S} a_i-b_i\) for every subset \(S\).
+        </p>
+    </div>
+</body>
+
+</html>

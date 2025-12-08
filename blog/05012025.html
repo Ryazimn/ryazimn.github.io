@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html>
+    
+<head>
+    <title>Blog</title>
+    <meta charset="UTF-8">
+    <link href="../styles.css" rel="stylesheet" type="text/css"/>
+    <script src="../mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <address>
+            <a href="../index.html">Home</a>
+            <hr>
+        </address>
+        <p><i>May 1, 2025</i></p>
+        <h2>Sensitivity Theorem</h2>
+        <h3>Two Alternative Proofs of a Lower Bound on the Non-deterministic Degree of Boolean Functions</h3>
+        <p>
+            In a previous <a href="04212025.html">blog</a>, I discussed one proof of a general lower bound on the non-deterministic degree of boolean functions using an inductive argument. In today's meeting with my research supervisor, he presented to me two alternative proofs, each with different insights.
+        </p>
+        <p>
+            Let us first recall the statement: if $f:\{0,1\}^n\to \{0,1\}$ is a boolean function, then
+            $$\ndeg(f)\geq n-\log_2 |\supp(f)|.$$
+        </p>
+        <details>
+            <summary>Second Proof</summary>
+            <p>
+                Let $p\in \RR[x_1,\dots,x_n]$ be a non-deterministic representation of $f$. If $p$ has degree $d$, then we may without loss of generality assume that $p$ has a term of the form $x_1x_2\cdots x_d$ (by simply permuting the variables and multiply by non-zero scalars). Now let $y\in \{0,1\}^{n-d}$ be arbitrary. We claim that there always exists an $x\in \{0,1\}^d$ such that the concaternation $x\circ y\in \{0,1\}^n$ satisfies $p(x\circ y)\neq 0$.
+            </p>
+            <p>
+                Consider setting all variables $x_{d+1},x_{d+2},\dots,x_{n}$ to $y$. Then after all the cancellations, we get a multilinear polynomials that contains the term $x_1x_2\cdots x_d$. The reason why we'll never lose this term in the cancellation is by the maximality of its degree. Now since this polynomial is non-zero, by the uniqueness of multilinear polynomial representation, this polynomial is not identically zero on the hypercube $\{0,1\}^d$. Therefore there exists an $x\in \{0,1\}^d$ such that the evaluation is non-zero. Together, this shows that $p(x\circ y)\neq 0$, as claimed.
+            </p>
+            <p>
+                This shows that $|\supp(f)|\geq 2^{n-d}$, and hence $\ndeg(f)=\deg(p)=d\geq n-\log_2 |\supp(f)|$, as desired. $\Box$
+            </p>
+        </details>
+        <p>
+            Before discussing the third proof, we need some preliminary definitions.
+        </p>
+        <h4>Hilbert Degree</h4>
+        <p>
+            Let $S\subseteq \{0,1\}^n$ be non-empty. We define the <strong>(Hilbert) degree</strong> $\deg(S)$ to be the smallest number $d$ such that all functions $f:S\to \RR$ has a multilinear polynomial representation of degree at most $d$. We first explore some basic properties of Hilbert degree.
+        </p>
+        <p>
+            Lemma: $\deg(S)\leq \log_2|S|$.
+        </p>
+        <details>
+            <summary>Proof</summary>
+            <p>
+                We prove by induction on $n$. For the base case $n=1$, let $S\subseteq \{0,1\}$. If $|S|=1$, then clearly every function $f:S\to \RR$ is constant, hence has degree $0$. Therefore $\deg(S)=0\leq \log_2 |S|$. Now if $|S|=\{0,1\}$. Then any function can be interpolated using a linear function. Therefore $\deg(S)\leq 1=\log_2 |S|$.
+            </p>
+            <p>
+                Now suppose $n>1$. Consider the sets $S_0=\{a\in S:a_1=0\}$, $S_1=\{a\in S:a_1=1\}$. Let $f:S\to \RR$ be any function. Suppose $|S_0|\leq |S_1|$. Let $f_1:S\to \RR$ be such that $f_1(x)=f(x)$ for all $x\in S_1$. Now let $f_0:S\to \RR$ be such that $f_0(x)+f_1(x)=f(x)$ for all $x\in S_0$. By definition of Hilbert degree, we have $\deg(f_0)\leq \deg(S_0)$ and $\deg(f_1)\leq \deg(S_1)$. Notice that for all $x\in S$, we have $((1-x_1)f_0+f_1)(x)=f(x)$. Therefore
+                $$\deg(f)\leq \deg((1+x_1)f_0+f_1)\leq \max\{\deg((1+x_1)f_0),\deg(f_1)\}\leq \max\{\deg(f_0)+1,\deg(f_1)\}.$$
+                Now by the induction hypothesis, we have $\deg(f)\leq \max\{\log_2|S_0|+1,\log_2|S_1|\}=\max\{\log_2(2\cdot |S_0|),\log_2 |S_1|\}\leq \log_2|S|$. The case $|S_0|\geq |S_1|$ can be handled similarly.
+            </p>
+            <p>
+                Now by induction, we have $\deg(S)\leq \log_2 |S|$ for all $|S|\subseteq \{0,1\}^n$ and all $n\in \NN$. $\Box$
+            </p>
+        </details>
+        <p>
+            Lemma: Let $A,B\subseteq \{0,1\}^n$ be non-empty sets (not necessarily disjoint), $S=A\cup B$, and let $f:S\to \RR$ be such that $f(x)\neq 0\Leftrightarrow x\in B$. Then
+            $$\deg(S)\leq \max\{\deg(A),\deg(f)+\deg(B)\}.$$
+        </p>
+        <details>
+            <summary>Proof</summary>
+            <p>
+                Consider an arbitrary function $g:S\to \RR$. Let $g_A:S\to \RR$ be such that $g_A(x)=f(x)$ for all $x\in A$, and $\deg(g_A)\leq \deg(A)$. Now let $g_B:S\to \RR$ be such that $g_A(x)+f(x)\cdot g_B(x)=g(x)$ for all $x\in B$. This is possible since $f(x)\neq 0$ for all $x\in B$. Notice that
+                $$\deg(g)\leq \deg(g_A+f\cdot g_B)\leq \max\{\deg(g_A),\deg(f)+\deg(g_B)\}\leq \max\{\deg(A),\deg(f)+\deg(B)\}.$$
+                Now since $g$ was arbitrary, we must have that $\deg(S)\leq \max\{\deg(A),\deg(f)+\deg(B)\}$, as desired. $\Box$
+            </p>
+        </details>
+        
+        <p>
+            We are now ready for the third proof.
+        </p>
+        <details>
+            <summary>Third Proof</summary>
+            <p>
+                Let $f:\{0,1\}\to \{0,1\}$ be a non-zero function. Let $B=\supp(f),A=B^C$. By the lemma above, we have
+                $$\deg(\{0,1\}^n)\leq \max\{\deg(A),\deg(f)+\deg(B)\}.$$
+                Since $f$ is non-zero, we must have that $|A| < 2^n$, therefore $\deg(A) < n$. Notice that $\deg(\{0,1\}^n)=n$, so the inequality becomes $n\leq \deg(f)+\deg(B)\leq \deg(f)+\log_2|B|$, hence $\deg(f)\geq n-\log_2 |\supp(f)|$. $\Box$
+            </p>
+        </details>
+        
+        <h3>Sensitivity and Fourier Degree</h3>
+        <p>
+            In this subsection, I'll talk about how to deduce
+            $$s(f)\geq \sqrt{\deg(f)}$$
+            from the combinatorial <a href="https://arxiv.org/abs/1907.00847">fact</a> that the induced subgraph of $\geq 2^{n-1}+1$ vertices on the hypercube $Q_{n}$ has a vertex of degree at least $\sqrt{n}$.
+        </p>
+        <details>
+            <summary>Proof</summary>
+            <p>
+                We may only consider the case when $\deg(f)=n$, since by suitably setting $n-\deg(f)$ variables to arbitrary fixed values, we obtain a multilinear polynomial $g$ of degree $\deg(f)$ on the hypercube $\{0,1\}^{\deg(f)}$, that satisfies $s(f)\geq s(g)$.
+            </p>
+            <p>
+                Consider the following subsets of the hypercube: $V_0=\{x\in \{0,1\}^n:f(x)=\PARITY_n(x)\}$, $V_1=\{x\in \{0,1\}^n:f(x)\neq\PARITY_n(x)\}$. These two sets clearly partitions the hypercube. Notice that the degree of $x\in V_0$ in the induced subgraph of $V_0$ in $Q_n$ is exactly the local sensitivity $s_x(f)$, and similarly for $V_0$. Suppose they have different sizes, i.e., $|V_0|,|V_1|\neq 2^{n-1}$, then one of them must have size at least $2^{n-1}+1$. Now by the combinatorial fact, we see that there exists a vertex $x\in \{0,1\}^n$ such that the local sensitivity $s_x(f)\geq \sqrt{n}$, and this shows that $s(f)\geq \sqrt{n}=\sqrt{\deg(f)}$, as desired.
+            </p>
+            <p>
+                It remains to handle the case when $|V_0|=|V_1|$. We claim that this is impossible, and we prove by contradiction. Let us work in the $\{\pm 1\}^n$ basis of boolean functions, where $1$ corresponds to $0$ and $-1$ corresponds to $1$. Under the linear change of variables $x_i\mapsto 1-2x_i$, we can transform a function with domain $\{0,1\}^n$ to a function with domain $\{\pm 1\}^n$. The degree is invariant under this change of variable, and notice that the $\PARITY_n$ function has polynomial representation $\PARITY_n(x)=x_1x_2\cdots x_n$.
+            </p>
+            <p>
+                We see that $(f\cdot \PARITY_n)^{-1}(1)=V_0$ and $(f\cdot \PARITY_n)^{-1}(-1)=V_1$. Therefore by summing over the hypercube, we would get
+                $$\sum_{x\in \{\pm1\}^n} (f\cdot \PARITY_n)(x)=|V_0|-|V_1|=0.$$
+                However, since $f$ has degree $n$, the monomial $x_1x_2\cdots x_n$ has non-zero coefficients in $f$. Since $x_i^2=1$ for all $x_i\in \{\pm 1\}$, $f\cdot \PARITY_n=f\cdot x_1x_2\cdot x_n$ must have a non-zero constant term $\widehat{f(\emptyset)}$. For any term of the form $\prod_{i\in S} x_i$ where $\emptyset\neq S\subseteq [n]$, in particular, let $j\in S$, we have
+                $$\sum_{x\in \{\pm1\}^n} \prod_{i\in S} x_i=\sum_{\substack{x\in \{\pm1\}^n\\x_j=-1}}-\prod_{\substack{i\in S\\i\neq j}}x_i+\sum_{\substack{x\in \{\pm1\}^n\\x_j=1}}\prod_{\substack{i\in S\\i\neq j}}x_i=0.$$
+                This shows that
+                $$\sum_{x\in \{\pm 1\}^n} (f\cdot \PARITY_n)(x)=2^n\cdot \widehat{f(\emptyset)}\neq 0,$$
+                a contradiction. This shows that $|V_0|\neq |V_1|$, as desired. $\Box$
+            </p>
+        </details>
+        <h3>Open Problems</h3>
+        <p>
+            Let $f:\{0,1\}^n\to \{0,1\}$ be a boolean function that depends on all $n$ variables. Is it true that $\rdeg(f)\geq \Omega(\log n)$?
+        </p>
+        <h3>Exercises</h3>
+        <p>
+            Show that there exists $S_0,S_1\subseteq \{0,1\}^n$ with $|S_0|=|S_1|$ but $\deg(S_0)\neq \deg(S_1)$. 
+        </p>
+    </div>
+</body>
+
+</html>

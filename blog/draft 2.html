@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html>
+    
+<head>
+    <title>Blog</title>
+    <meta charset="UTF-8">
+    <link href="../styles.css" rel="stylesheet" type="text/css"/>
+    <script src="../mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <address>
+            <a href="../home.html">Home</a>
+            <hr>
+        </address>
+        <p><i>May 1, 2025</i></p>
+        <h2>Converse of the Stone-Weierstrass Theorem and Thoughts</h2>
+        <p>
+            Theorem 7.32 (Stone-Weierstrass Theorem) in Rudin's Principles of Mathematical Analysis states that if $\mathscr{A}$ is an algebra of real continuous functions on a compact metric space $K$ that separates points and vanish at no point on $K$, then the uniform closure $\mathscr{B}$ of $\mathscr{A}$ consists of all real continuous functions on $K$.
+        </p>
+        <p>
+            These two conditions are necessary for an algebra $\mathscr{A}$ to be dense in $\mathcal{C}(K)$. If we drop the vanish at no point condition, then we claim that the uniform closure of $\mathscr{A}$ is the set of all continuous functions $f:K\to \RR$ such that $f(p)=0$ for some fixed $p\in K$, denote this set by $\mathcal{C}_p(K)$.
+        </p>
+        <details>
+            <summary>Proof</summary>
+            <p>
+                Let $\mathscr{A}$ be an algebra that separates points, but vanish at point $p\in K$. Consider the set $\mathscr{A}'=\{f+c:f\in \mathscr{A},c\in \RR\}$. This forms an algebra of functions that separates points and vanish at no point, hence by the Stone-Weierstrass Theorem, its uniform closure is $\mathcal{C}(K)$. Now for any continuous function $f$ such that $f(p)=0$, there exists a sequence $\{g_n\}_{n\in \NN}\subseteq \mathscr{A}'$ with $g_n=f_n+c_n$ for some $f_n\in \mathscr{A}$ and $c_n\in \RR$, such that $g_n$ converges to $f$ uniformly. In particular, notice that $g_n(p)=f_n(p)+c_n=c_n$ converges to $0$. Therefore
+                $$\lim_{n\to\infty} g_n=\lim_{n\to\infty} f_n+c_n=\left(\lim_{n\to\infty} f_n+c_n-c_n\right)+\lim_{n\to\infty} c_n=\lim_{n\to\infty} f_n.$$
+                This shows that $\{f_n\}_{n\in\NN}\subseteq \mathscr{A}$ converges uniformly to $f$, hence $\mathcal{C}_p(K)\subseteq \overline{\mathscr{A}}$.
+            </p>
+            <p>
+                Conversely, if $\{f_n\}_{n\in \NN}\subseteq \mathscr{A}$ converges uniformly to a function $f$, then
+                $$f(p)=\lim_{n\to\infty} f_n(p)=\lim_{n\to\infty} 0=0,$$
+                so $f\in \mathcal{C}_p(K)$, and hence $\overline{\mathscr{A}}\subseteq \mathcal{C}_p(K)$.
+            </p>
+            <p>
+                Together, this shows that $\overline{\mathscr{A}}=\mathcal{C}_p(K)$. $\Box$
+            </p>
+        </details>
+        <p>
+            It is more interesting if we drop the separating point condition. 
+        </p>
+        
+        
+        <h3>References</h3>
+        <ul>
+            <li>
+                Rudin, W. (1976) Principles of Mathematical Analysis. 3rd Edition, McGraw-Hill, New York, 145.
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>

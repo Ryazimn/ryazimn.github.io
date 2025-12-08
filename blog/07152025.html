@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+    
+<head>
+    <title>Blog</title>
+    <meta charset="UTF-8">
+    <link href="../styles.css" rel="stylesheet" type="text/css"/>
+    <script src="../mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <address>
+            <a href="../index.html">Home</a>
+            <hr>
+        </address>
+        <p><i>July 15, 2025</i></p>
+        <h2>Solution to <a href="https://codeforces.com/contest/1208/problem/F">Manthan, Codefest 19 Problem F</a></h2>
+        <h3>Problem description</h3>
+        <p>
+            You are given a list of $n$ non-negative integers, $a_1,a_2,\dots,a_n$. Compute the maximum value of $a_i | (a_j \& a_k)$ over all triples $1\leq i < j < k \leq n$.
+        </p>
+        <h3>Constraints</h3>
+        <p>
+            $3\leq n\leq 10^6$, $0\leq a_i\leq 2\cdot 10^6$
+        </p>
+        <h3>Analysis</h3>
+        <p>
+            My strategy to compute the maximum value is to fix $i$, and try to find the value of $a_j \& a_k$ that maximize the bitwise OR with $a_i$. To find the maximum bitwise OR with $a_i$, we can consider the bits in decreasing order, and check if there exists numbers $a_j,a_k$ with $j > k > i$ such that both $a_j,a_k$ contain that bit. If such pair of numbers exists, then we can move on to the next significant bit, and check if there exists a pair that contains this bit and all bits previously considered.
+        </p>
+        <p>
+            Now how do we check the existence of such $a_j,a_k$ efficiently? It suffices to compute for each bitmask on $21$ bits $(2^{21}=2,097,152)$, what are the two largest numbers $j,k$ such that the mask both $a_j,a_k$ contains this particular bitmask. This can be done efficiently using dynamic programming by processing the bitmasks in decreasing order and transition from all the minimal supersets. This solution works in $O(n + A2^A)$, where $A$ is the maximum number of bits over all $a_i$.
+        </p>
+    </div>
+</body>
+
+</html>

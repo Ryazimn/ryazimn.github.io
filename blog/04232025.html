@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html>
+    
+<head>
+    <title>Blog</title>
+    <meta charset="UTF-8">
+    <link href="../styles.css" rel="stylesheet" type="text/css"/>
+    <script src="../mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <address>
+            <a href="../index.html">Home</a>
+            <hr>
+        </address>
+        <p><i>April 23, 2025</i></p>
+        <h2>Solution to <a href="https://codeforces.com/contest/1743/problem/F">Educational Codeforces Round 137 Problem F</a></h2>
+        <h3>Problem description</h3>
+        <p>
+            You are given $n$ sets $S_1,\dots,S_n$, each is described by two integers $l_i,r_i$, which represents the set of integers $\{l_i,l_{i+1},\dots,r_i\}$. Consider the expression
+            $$(((S_1\ \mathbin{op}_1\ S_2)\ \mathbin{op}_2\ S_3)\ \mathbin{op}_3\ S_4)\ \dots\ \mathbin{op}_{n-1}\ S_n,$$
+            where $\mathbin{op}_i$ is one of the following binary set operation: set union $\bigcup$, set intersection $\bigcap$, or symmetric set difference $\bigoplus$. Calculate the sum of sizes of the resulting set over all $3^{n-1}$ ways of assigning the operations to $\mathbin{op}_i$.
+        </p>
+        <h3>Constraints</h3>
+        <p>
+            $1\leq n\leq 3\cdot 10^5$, $0\leq l_i\leq r_i\leq 3\cdot 10^5$
+        </p>
+        <h3>Analysis</h3>
+        <p>
+            The first observation is that we can instead count for each element in $\{0,1,\dots,3\cdot 10^5\}$, the number of possible ways of assigning operations so that the resulting set contains this element. Notice that if we use $0$ and $1$ to represent if the element is in the set, then the intersection operation is exactly the bitwise AND, union operation is exactly the bitwise OR, and symmetric difference is exactly the bitwise XOR.
+        </p>
+        <p>
+            Let's now consider the smaller problem that given a bit string $s$ of length $n$, you can assign the above three bitwise operations to
+            $$(((s_1\ \mathbin{op}_1\ s_2)\ \mathbin{op}_2\ s_3)\ \mathbin{op}_3\ s_4)\ \dots\ \mathbin{op}_{n-1}\ s_n,$$
+            calculate the total number of ways so that the resulting value is $1$. Now this is a standard dynamic programming problem, which one can solve by defining two states $dp_{j,0},dp_{j,1}$ for each stage $j$, representing the total number of ways one can make the resulting value $0$ or $1$ repectively. We have the following transitions 
+            $$dp_{j,0}=\begin{cases}
+                3\cdot dp_{j-1,0}+dp_{j-1,1}&\text{if }s_j=0\\
+                dp_{j-1,0}+dp_{j-1,1}&\text{if }s_j=1
+            \end{cases},\ dp_{j,1}=\begin{cases}
+                2\cdot dp_{j-1,1}&\text{if }s_j=0\\
+                2\cdot dp_{j-1,0}+2\cdot dp_{j-1,1}&\text{if }s_j=1
+            \end{cases}.$$
+            However, naively doing dynamic programming for each element would be too slow. We want to be able to process many elements at the same time. Notice that the transition takes a fixed linear combination of the previous state, this motivates us maintain the coefficients of the linear combination of the base state. In this way, we can process transitions for multiple elements.
+        </p>
+        <p>
+            Say that we are doing the dynamic programming transitions on the $j$th stage. For all elements $i < l_j$ or $i > r_j$, we can apply the same transition, and similarly for all elements $l_j\leq i\leq r_j$. To apply the transition efficiently, we can use a lazy segment tree of matrices, and do range matrix multiplication. The overall time complexity of this solution is $O((n+M)\log M)$, where $M$ is the upper bound on the elements ($M=3\cdot 10^5$ in this problem).
+        </p>
+    </div>
+</body>
+
+</html>

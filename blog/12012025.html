@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+    
+<head>
+    <title>Blog</title>
+    <meta charset="UTF-8">
+    <link href="../styles.css" rel="stylesheet" type="text/css"/>
+    <script src="../mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <address>
+            <a href="../index.html">Home</a>
+            <hr>
+        </address>
+        <p><i>December 1, 2025</i></p>
+        <h2>Solution to <a href="https://codeforces.com/contest/1716/problem/E">Educational Codeforces Round 133 Problem E</a></h2>
+        <h3>Problem description</h3>
+        <p>
+            You are given an array $a$ of size $2^n$, indexed from $1$ to $2^n$, and $q$ queries. In each query, you are given an integer $k$, and to process the query, do the following: For each $i\in [1,2^n-2^k]$ in ascending order, if the $i$th element isn't already swapped with some other element, swap $a_i$ and $a_{i+2^k}$. Then output the maximum sum over all contiguous subarray of $a$.
+        </p>
+        <h3>Constraints</h3>
+        <p>
+            $1\leq n\leq 18$, $1\leq q\leq 2\cdot 10^5$, $0\leq k\leq n - 1$
+        </p>
+        <h3>Analysis</h3>
+        <p>
+            Let's think about how we can compute the maximum subarray sum is a static array. We can do it in linear time by computing a prefix sum and prefix minimum of the prefix sum array. However, the swap operation makes the prefix sum array very difficult to maintain. An alternative approach is via divide and conquer. See <a href="https://cses.fi/problemset/task/3226">this problem</a>. The idea is we can essentially find it using a segment tree that maintains the maximum prefix, suffix sum for each segment in the tree.
+        <p>
+        </p>
+            We can build a perfect binary tree with all $2^n$ array elements as leaves. Then each query is equivalent to chosing a level of the binary tree and swap the left and right children of vertices on that level simutaneously. Notice that after each swap operation, the information maintained in each vertex below this level isn't affected, so naively, the cost is $O(2^k)$ is $k$ is the current depth. In the worst case, the query could be calling the last level for all $q$ times.
+        </p>
+        <p>
+            Now notice that the tree can have at most $2^n$ configurations, corresponding to whether if each of the $n$ levels is swapped or not, so let's precompute the answer for all of these configurations. My solution is slightly different from the official solution, but the idea is similar. I used Gray code, which is a permutation of integers in $\{0,1,\dots,2^n-1\}$ such that in the binary representation, each adjacent integers in the sequence only differs by one bit. In the sequence I constructed, the total number of times that bit $2^{n-i}$ is flipped is $2^i$ times. Therefore if we recalculate the tree values naively, the total cost would be $\sum_{i=0}^n 2^{n-i}\cdot 2^i=n\cdot 2^n$, which is efficient enough to pass the test.
+        </p>
+        <p>
+            The time complexity of this solution is $O(n\cdot 2^n + q)$.
+        </p>
+    </div>
+</body>
+
+</html>

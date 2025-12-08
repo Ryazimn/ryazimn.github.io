@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html>
+    
+<head>
+    <title>Blog</title>
+    <meta charset="UTF-8">
+    <link href="../styles.css" rel="stylesheet" type="text/css"/>
+    <script src="../mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <address>
+            <a href="../index.html">Home</a>
+            <hr>
+        </address>
+        <p><i>April 30, 2025</i></p>
+        <h2>Solution to <a href="https://codeforces.com/contest/1438/problem/E">Codeforces Round 682 Problem E</a></h2>
+        <h3>Problem description</h3>
+        <p>
+            You are given an array $a$ is length $n$ find the number of subarrays $a[l,\dots,r]$ of length at least $3$ that satisfies
+            $$a[l]\oplus a[r]=a[l+1]+a[l+2]+\cdots+a[r-2]+a[r-1].$$
+            Here $\oplus$ is the bitwise XOR operation.
+        </p>
+        <h3>Constraints</h3>
+        <p>
+            $3\leq n\leq 2\cdot 10^5$, $1\leq a_i < 2^{30}$
+        </p>
+        <h3>Analysis</h3>
+        <p>
+            The key observation in this problem is, there are not many subarrays with this property. Notice that for any subarray $a[l,\dots,r]$ with this property, if $2^b$ is the largest bit in this subarray, then at least one of $a[l],a[r]$ must contain this bit, and the number of occurrences of this bit in the interior of the subarray (i.e., $a[l+1,\dots,r-1]$) must be at most $1$. These two conditions can guarantee that the total number of subarrays with the desired property is at most order $O(n\log (\max a_i))$.
+        </p>
+        <p>
+            Now we may fix the highest bit, and carefully brute forces all subarrays with the above property. The overall time complexity is $O(n\log (\max a_i))$.
+        </p>
+    </div>
+</body>
+
+</html>

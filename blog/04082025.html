@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+    
+<head>
+    <title>Blog</title>
+    <meta charset="UTF-8">
+    <link href="../styles.css" rel="stylesheet" type="text/css"/>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <address>
+            <a href="../index.html">Home</a>
+            <hr>
+        </address>
+        <p><i>April 8, 2025</i></p>
+        <h2>Solution to <a href="https://codeforces.com/contest/2093/problem/G">Solution to Codeforces Round 1016 Problem G</a></h2>
+        <h3>Problem description</h3>
+        <p>
+            Given an array \(a\) of length \(n\), and an integer \(k\). Find the length of the shortest subarray of \(a\) such that the maximum bitwise XOR value over all pairs of the subarray is at least \(k\).
+        </p>
+        <h3>Constraints</h3>
+        <p>
+            \(1\leq n\leq 2\cdot 10^5\), \(0\leq k\leq 10^9\), \(0\leq a_i\leq 10^9\)
+        </p>
+        <h3>Analysis</h3>
+        <p>
+            We first consider a different problem: given an array of length \(n\), and an integer \(m\), find an elements of the array such that its bitwise XOR value with \(m\) is maximum possible. This problem can be solved very efficiently in time \(O(n\log A)\), where \(A\) is the maximum element in the array, by using the binary trie data structure.
+        </p>
+        <p>
+            The idea is that we start from the most significant bit, look for an element in the array such this bit is different from this bit of \(m\), so that this bit is set to \(1\) in their bitwise XOR value. Each time we find such element, we eliminate all elements in the array that has the same bit and move on to the next iteration. To do this efficiently, we can use the binary trie data structure.
+        </p>
+        <p>
+            To solve the original problem, we process the array starting from the first element and build a binary trie. Say we are currently at position \(i\), and processing the number \(a[i]\). Each time we create or pass through a node, we include an additional information of the maximum index over all elements in that subtree.
+        </p>
+        <p>
+            Then we walk on the binary trie, and each time we have to make a choice on which children to go, we check whether if this bit of \(k-1\) is \(1\). If it is \(1\), then we cannot make the maximum XOR bigger. If not, then we can make the maximum XOR bigger by choosing the subtree that has a different value than this bit of \(a[i]\), so we update our answer with the maximum index stored in that node, and choose the other path (if it exists).
+        </p>
+        <p>
+            The time and space complexity of the above algorithm are both \(O(n\log A)\), where \(A\) is the upper bound on elements in array \(a\).
+        </p>
+        <h3>Similar Problems</h3>
+        <p>
+            <a href="https://codeforces.com/contest/817/problem/E">Educational Codeforces Round 23 Problem E</a><br>
+            <a href="https://codeforces.com/contest/1777/problem/F">Codeforces Round 845 (Div. 2) and ByteRace 2023 Problem F</a><br>
+            <a href="https://codeforces.com/contest/1902/problem/E">Educational Codeforces Round 159 (Rated for Div. 2) Problem E</a><br>
+            <a href="https://codeforces.com/contest/1625/problem/D">Codeforces Round 765 (Div. 2) Problem D</a>
+        </p>
+    </div>
+</body>
+
+</html>

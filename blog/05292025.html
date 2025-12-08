@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+    
+<head>
+    <title>Blog</title>
+    <meta charset="UTF-8">
+    <link href="../styles.css" rel="stylesheet" type="text/css"/>
+    <script src="../mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <address>
+            <a href="../index.html">Home</a>
+            <hr>
+        </address>
+        <p><i>May 29, 2025</i></p>
+        <h2>Solution to <a href="https://codeforces.com/contest/1699/problem/D">Codeforces Round 804 Problem D</a></h2>
+        <h3>Problem description</h3>
+        <p>
+            You are given an array $a=\{a_1,a_2,\dots,a_n\}$ of length $n$. In one operation, you can choose two adjacent elements $a_i,a_{i+1}$ with $a_i\neq a_{i+1}$, and delete them from the array, and concatenate the rest of the array, so the resulting array will look like $\{a_1,a_2,\dots,a_{i-1},a_{i+2},\dots,a_n\}$.
+        </p>
+        <p>
+            Your goal is to find the maximum length of an array of <strong>equal</strong> elements after some number of operations.
+        </p>
+        <h3>Constraints</h3>
+        <p>
+            $1\leq n\leq 5000$, $1\leq a_i\leq n$
+        </p>
+        <h3>Analysis</h3>
+        <p>
+            We first consider what consecutive subarrays can be deleted using the operation. One can do this with dynamic programming, by defining states $dp[l][r]\in \{True, False\}$ to represent whether if the subarray $a[l,\dots,r]$ can be deleted. The time complexity would be $O(n^3)$ as there are $O(n^2)$ states, and it takes $O(n)$ for state transitions. This is too slow. The key observation is, consider the element with maximum frequency in the subarray. Let the subarray have length $len$, and $freq$ be the maximum frequency. We claim that the subarray can be deleted if and only if $len$ is even, and $freq\cdot 2\leq len$. Clearly these two conditions are necessary. The sufficiency of these two conditions can be seen by an easy induction.
+        </p>
+        <p>
+            With this observation, we can precompute all subarrays that can be deleted in $O(n^2)$ time. Now we can check all possible number from $1$ to $n$, and using dynamic programming to compute the maximum length of resulting array whose all elements equal to this fixed number. This yields a solution with time and space complexity $O(n^2)$.
+        </p>
+    </div>
+</body>
+
+</html>

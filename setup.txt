@@ -1,0 +1,6 @@
+https://my.cs.ubc.ca/docs/setting-personal-website
+
+chmod 755 to give access
+chmod 700 to restrict access
+
+Configure MathJax: https://docs.mathjax.org/en/latest/web/configuration.html
