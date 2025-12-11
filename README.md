@@ -1,1 +1,0 @@
-# ryazimn.github.io
