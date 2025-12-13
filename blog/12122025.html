@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html>
+    
+<head>
+    <title>Blog</title>
+    <meta charset="UTF-8">
+    <link href="../styles.css" rel="stylesheet" type="text/css"/>
+    <script src="../mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <address>
+            <a href="../index.html">Home</a>
+            <hr>
+        </address>
+        <p><i>December 12, 2025</i></p>
+        <h2>Non-deterministic Degree of Parity without Symmetrization</h2>
+        <p>
+            Let $f:\{0,1\}^n \to \RR$ be a non-zero Boolean function such that $f(x)\neq 0$ whenever $|x|$ is even. Then $f$ must have degree at least $n/2$.
+        </p>
+        <p>
+            The "modern" way to approach this is via the symmetrization technique, which transforms $f$ into a univariate polynomial $\hat f$ of degree at most $\deg(f)$, then argue that it has at least $n/2$ zeros, so degree is at least $n/2$ (there is a subtlety that the polynomial may be the zero polynomial, but that's not the main point of this article). This is the modern way. Now I will discuss a classical linear algebraic way to prove this.
+        </p>
+        <p>
+            It turns out to be more convenient to work over the $\{\pm 1\}$ basis, so we will assume $f:\{\pm 1\}^n \to \RR$ for the rest of the article. Consider the matrix $A$ of dimension $2^{n-1}\times \sum_{m<\lceil n/2\rceil} \binom{n}{m}$ indexed by all even hamming weight bit string and monomials of degree at most $\lceil n/2\rceil-1$. We use subset $S\subset [n]$ to represent both bit strings and monomials. The entry on row $S$ and column $T$ is the value of evaluating monomial $x^T$ on the input $S$, which is exactly $(-1)^{|S\Delta T|}$. We claim that to show the above, it suffices to show that $A$ has full rank $\sum_{m<\lceil n/2\rceil} \binom{n}{m}$. This is because if $f$ has degree $<\lceil n/2\rceil$, then $Af=0$ is exactly the condition that $f$ vanishes on all even hamming weight inputs. If $A$ has full rank, then this says that $f=0$, contradicting the assumption that $f$ is non-zero.
+        </p>
+        <p>
+            Now we proceed to show that $A$ has full rank. The key idea is to consider the matrix $M=A^TA$, which has the same rank as $A$.
+        </p>
+        <details>
+            <summary>Quick proof</summary>
+            <p>
+                Let $v\in N(A)$, then $A^T Av=0$, so $v\in N(A^T A)$. Now let $v\in N(A^T A)$, then $v^T A^T Av=0\Rightarrow \|Av\|^2_2=0\Rightarrow Av=0$, so $v\in N(A^TA)$. This shows that $A^T A$ have equal null space, so they have the same rank.
+            </p>
+            <p>
+                Note that this proof does not work over general fields (such as over non-zero characteristics), e.g., consider $J_2$ over $\FF_2$. Other proofs exists using SVD or QR decomposition.
+            </p>
+        </details>
+        <p>
+            For $S,T\subset [n]$, we compute
+            $$M_{S,T}=\sum_{x\text{ even weight}} A_{x,S}\cdot A_{x,T}=(-1)^{x \cap (S\Delta T)}=\sum_{x\text{ even}} \chi_{S\Delta T}(x).$$
+            On this step, there are several ways to approach this sum. The original paper did this by direct counting. My approach is more algebraic, using the fact that the parity functions form an orthogonal basis. Note that $S\Delta T\neq [n]$.
+            $$\sum_{x\text{ even}} \chi_{S\Delta T}(x)=\frac{1}{2}\sum_{x}(\chi_{[n]}\pm 1) \cdot \chi_{S\Delta T}(x)=\frac{1}{2}\sum_{x} \chi_{[n]\Delta S\Delta T}\pm \chi_{S\Delta T}=\begin{cases} 0& S\neq T\\ 2^{n-1}&S=T\end{cases}.$$
+            This shows that $M=A^TA$ is invertible, so the claim is proved. $\Box$
+        </p>
+        <p>
+            An immediate corollary of this is $\rdeg(f)\geq n/2$. A natural question about this result is, how does it generalize to polynomials vanishing on other subsets of the hypercube?
+        </p>
+    </div>
+</body>
+
+</html>

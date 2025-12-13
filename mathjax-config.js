@@ -9,6 +9,7 @@ window.MathJax = {
             supp: "{\\mathrm{Supp}}",
             RR: "{\\mathbb{R}}",
             NN: "{\\mathbb{N}}",
+            FF: "{\\mathbb{F}}",
             PARITY: "{\\mathrm{PARITY}}"
         }
     },
