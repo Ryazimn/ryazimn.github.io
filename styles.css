@@ -12,7 +12,6 @@ body {
     align-self: center;
     margin-left: auto;
     margin-right: auto;
-    /* margin-bottom: 0%; */
     max-width: 65%;
     padding-right: 10px;
     padding-left:  10px;
@@ -27,11 +26,3 @@ ul {
 table {
     border: 1px solid gray;
 }
-
-/* td {
-  text-align: center;
-} */
-
-/* table, td, th {
-    border: 1px solid gray;
-} */

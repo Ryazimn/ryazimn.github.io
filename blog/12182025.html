@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html>
+    
+<head>
+    <title>Blog</title>
+    <meta charset="UTF-8">
+    <link href="../styles.css" rel="stylesheet" type="text/css"/>
+    <script src="../mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <address>
+            <a href="../index.html">Home</a>
+            <hr>
+        </address>
+        <p><i>December 18, 2025</i></p>
+        <h2>System of Difference Constraints Problem</h2>
+        <h3>Introduction</h3>
+        <p>
+            A system of difference constraints on $n$ variables $x_1,\dots,x_n$ is of the form
+            $$\begin{cases}
+                x_{i_1}-x_{j_1}\leq c_1\\
+                x_{i_2}-x_{j_2}\leq c_2\\
+                \vdots\\
+                x_{i_m}-x_{j_m}\leq c_m
+            \end{cases},$$
+            for some $c_k\in \RR$. The goal is to determine if this is satisfiable, and if it is, compute any satisfiable assignment.
+        </p>
+        <p>
+            This is a specific instance of Linear-Programming problem, which in general is hard. Similar to how 2-SAT has a polynomial time algorithm, yet 3-SAT is NP-complete, one would expect this can be efficiently solved. The idea is similar to how 2-SAT is solved, by considering some associated graph. For the above instance, we can construct a graph $G$ on $n+1$ vertices and $m+n$ directed weighted edges:
+            $$(j_1\to i_1,c_1),(j_2\to i_2,c_2),\dots,(j_m\to i_m,c_m),(0\to 1,0),\dots,(0\to n,0).$$
+            Then run single source shortest path from vertex $0$.
+        </p>
+        <p>
+            We claim that if there is a negative cycle in $G$, then there is no solution. Otherwise, the shortest path value gives a satisfiable assignment.
+        </p>
+        <details>
+            <summary>Proof</summary>
+            <p>
+                Suppose there is no negative cycle, and let $x_i=dist[i]$ be the length of the shortest path to vertex $i$ from vertex $0$. If there is a constraint $x_i-x_j\leq c_k$, then the edge $(j\to i,c_k)$ effectively guarantees that $x_i=dist[i]\leq dist[j]+c_k=x_j+c_k$.
+            </p>
+            <p>
+                We now show that if there is a negative cycle, then there is no solution. Let $i_1\xrightarrow{c_1} i_2\xrightarrow{c_2} \cdots \xrightarrow{c_{k-1}} i_k\xrightarrow{c_k} i_1$ be such a cycle, with $c_1+c_2+\cdots +c_k < 0$. This corresponds to the constraints:
+                $$\begin{cases}
+                    x_{i_2}-x_{i_1}\leq c_1\\
+                    x_{i_3}-x_{i_2}\leq c_2\\
+                    \vdots\\
+                    x_{i_1}-x_{i_2}\leq c_k
+                \end{cases}.$$
+                Adding up all these constraints gives $0\leq c_1+\cdots c_k$, a contradiction, hence showing that there is no satisfiable assignment, and the claim is proved. $\Box$
+            </p>
+        </details>
+        <p>
+            Note that this doesn't depend on the weight of edges $0\to i$. Now to find the shortest path or a negative cycle, one can run Bellman-Ford in time $O(nm)$ (or you can use <a href="https://arxiv.org/abs/2311.02520">this</a> algorithm if you can implement it!).
+        </p>
+        <h3>Example <a href="https://codeforces.com/contest/241/problem/E">Problem</a></h3>
+        <p>
+            You are given a directed acyclic graph on $n$ vertices and $m$ edges ($2\leq n\leq 1000, 1\leq m\leq 5000$). The goal is to assign each edge weight either $1$ or $2$ such that every path from vertex $1$ to vertex $n$ have the same length. It's guaranteed that there is a path from $1$ to $n$.
+        </p>
+        <p>
+            We certainly only need to consider vertices that lie on at least one path from $1$ to $n$, so assume all vertices satisfies this. My first idea is to maintain for each vertex the range of possible values of the length of the shortest path, but the subproblems are not properly partitioned, so this approach didn't work. Another idea is to check for every pair of reachable vertices, compute the longest and shortest path between them. If the ratio is at most $2$, then there is a solution. However, it is easy to construct a counterexample.
+        </p>
+        <p>
+            One way to approach this problem is to think in reverse, use the shortest from $1$ to each vertex to determine the edge weight. This way we only have to worry about how big can each edge weight be. Let $u\xrightarrow{w} v$ be an edge, then we let $w=dist[v]-dist[u]$, and $w$ must satisfy $1\leq w\leq 2$, which is equivalent to satisfying the two inequalities $dist[v]-dist[u]\leq 2$ and $dist[u]-dist[v]\leq -1$. This gives a system of difference constraints, which we can solve in $O(nm)$ time.
+        </p>
+    </div>
+</body>
+
+</html>
