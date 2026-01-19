@@ -24,13 +24,13 @@
             Hall's marriage theorem states that given a finite bipartite graph $G$ with bipartite sets $L$ and $R$, and edge set $E$. An $L$-perfect matching is a set of disjoint edges that covers every vertex in $L$. For a subset $W$ of $L$, let $N_G(W)$ denote the set of neighbours of $W$ in $G$. Then $G$ has a $L$-perfect matching if and only if $|N_G(W)|\geq |W|$ for every subset $W$ of $L$.
         </p>
         <p>
-            It's easy to see the necessity of this condition. We now show sufficiency by constructing a flow network. We may assume that $|L|\leq |R|$. Add two vertices $s,t$ representing a source and a sink. Direct all edges in $E$ from $L$ to $R$ with capacity $1$. Add directed edges from $s$ to every vertex in $L$ with capacity $1$, and from every vertex in $R$ to $t$ with capacity $\infty$.
+            It's easy to see the necessity of this condition. We now show sufficiency by constructing a flow network. Add two vertices $s,t$ representing a source and a sink. Direct all edges in $E$ from $L$ to $R$ and give them capacity $1$. Add directed edges from $s$ to every vertex in $L$ with capacity $1$, and from every vertex in $R$ to $t$ with capacity $1$.
         </p>
         <div style="text-align: center;">
             <img src="../files/flow-matching.png" style="max-width: 60%;">
         </div>
         <p>
-            It's clear that the maximum flow from $s$ to $t$ in this flow network is equal to the size of the maximum matching. Consider an arbitrary partition of the vertices into sets $S,T$ where $s\in S,t\in T$. Then we must have $R\cap S=\emptyset$, since otherwise the cut capacity is $\infty$. Let $U=L\cap S,V=L\cap T$. Then the cut capacity is equal to $|V|+|N_G(U)|\geq |V|+|U|=|L|$, that is, the size of maximum matching is at least $|L|$, as desired.
+            It's clear that the maximum flow from $s$ to $t$ in this flow network is equal to the size of the maximum matching. Consider an arbitrary partition of the vertices in $L\cup R$ into sets $S,T$. Then the cut capacity is at least $|T\cap L|+|S\cap R|+|T\cap N_G(S\cap L)|$. Now this is at least $|T\cap L|+|S\cap R|+|N_G(S\cap L)|-|S\cap R|=|T\cap L|+|N_G(S\cap L)|\geq |T\cap L|+|S\cap L|=|L|$. Therefore the minimum cut capacity is at least $|L|$. In other words, the maximum matching has size at least $|L|$.
         </p>
     </div>
 </body>
