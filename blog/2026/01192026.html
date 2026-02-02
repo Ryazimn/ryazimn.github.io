@@ -5,8 +5,8 @@
 <head>
     <title>Blog</title>
     <meta charset="UTF-8">
-    <link href="../styles.css" rel="stylesheet" type="text/css"/>
-    <script src="../mathjax-config.js" defer></script>
+    <link href="../../styles.css" rel="stylesheet" type="text/css"/>
+    <script src="../../mathjax-config.js" defer></script>
     <script type="text/javascript" id="MathJax-script" defer
         src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
     </script>
@@ -15,7 +15,7 @@
 <body>
     <div class="wrapper">
         <address>
-            <a href="../index.html">Home</a>
+            <a href="../../index.html">Home</a>
             <hr>
         </address>
         <p><i>January 19, 2026</i></p>
@@ -27,7 +27,7 @@
             It's easy to see the necessity of this condition. We now show sufficiency by constructing a flow network. Add two vertices $s,t$ representing a source and a sink. Direct all edges in $E$ from $L$ to $R$ and give them capacity $1$. Add directed edges from $s$ to every vertex in $L$ with capacity $1$, and from every vertex in $R$ to $t$ with capacity $1$.
         </p>
         <div style="text-align: center;">
-            <img src="../files/flow-matching.png" style="max-width: 60%;">
+            <img src="../../files/flow-matching.png" style="max-width: 60%;">
         </div>
         <p>
             It's clear that the maximum flow from $s$ to $t$ in this flow network is equal to the size of the maximum matching. Consider an arbitrary partition of the vertices in $L\cup R$ into sets $S,T$. Then the cut capacity is at least $|T\cap L|+|S\cap R|+|T\cap N_G(S\cap L)|$. Now this is at least $|T\cap L|+|S\cap R|+|N_G(S\cap L)|-|S\cap R|=|T\cap L|+|N_G(S\cap L)|\geq |T\cap L|+|S\cap L|=|L|$. Therefore the minimum cut capacity is at least $|L|$. In other words, the maximum matching has size at least $|L|$.

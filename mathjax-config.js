@@ -14,7 +14,11 @@ window.MathJax = {
             QQ: "{\\mathbb{Q}}",
             NN: "{\\mathbb{N}}",
             FF: "{\\mathbb{F}}",
-            PARITY: "{\\mathrm{PARITY}}"
+            PARITY: "{\\mathrm{PARITY}}",
+            nrk: "{\\mathrm{nrk}}",
+            rrk: "\\mathrm{rrk}",
+            srr: "\\mathrm{srr}",
+            rk: "{\\mathrm{rk}}"
         }
     },
     svg: {

@@ -5,8 +5,8 @@
 <head>
     <title>Blog</title>
     <meta charset="UTF-8">
-    <link href="../styles.css" rel="stylesheet" type="text/css"/>
-    <script src="../mathjax-config.js" defer></script>
+    <link href="../../styles.css" rel="stylesheet" type="text/css"/>
+    <script src="../../mathjax-config.js" defer></script>
     <script type="text/javascript" id="MathJax-script" defer
         src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
     </script>
@@ -15,7 +15,7 @@
 <body>
     <div class="wrapper">
         <address>
-            <a href="../index.html">Home</a>
+            <a href="../../index.html">Home</a>
             <hr>
         </address>
         <p><i>December 12, 2025</i></p>
@@ -35,7 +35,7 @@
         <details>
             <summary>Quick proof</summary>
             <p>
-                Let $v\in N(A)$, then $A^T Av=0$, so $v\in N(A^T A)$. Now let $v\in N(A^T A)$, then $v^T A^T Av=0\Rightarrow \|Av\|^2_2=0\Rightarrow Av=0$, so $v\in N(A^TA)$. This shows that $A^T A$ have equal null space, so they have the same rank.
+                Let $v\in N(A)$, then $A^T Av=0$, so $v\in N(A^T A)$. Now let $v\in N(A^T A)$, then $v^T A^T Av=0\Rightarrow \|Av\|^2_2=0\Rightarrow Av=0$, so $v\in N(A^TA)$. This shows that $A^T A$ have equal null space, so they have the same rank. $\Box$
             </p>
             <p>
                 Note that this proof does not work over general fields (such as over non-zero characteristics), e.g., consider $J_2$ over $\FF_2$. Other proofs exists using SVD or QR decomposition.
