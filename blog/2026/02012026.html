@@ -25,12 +25,12 @@
             $$\srr\leq O(r\log r).$$
             This article will discuss the proof of this result, and some thoughts about different notions of rank of Boolean matrices, and their connections to communication complexity.
         </p>
-        <h3>Communication is bounded by Rank (not log-rank unfortunately...)</h3>
+        <h3>Communication is Bounded by Rank (not log-rank unfortunately...)</h3>
         <p>
-            As a warmup for next section, I will show that $D(M)\leq \rk(M)+1$ for any Boolean matrix $M$, where $D(M)$ is the deterministic communication complexity of $M$. The main idea is to show that $M$ can have at most $2^{\rk(M)}$ distinct columns, hence we can design a communication protocol by encoding the distinct columns with $\log_2 2^{\rk(M)}=\rk(M)$ bits and compute the function using $\rk(M)+1$ bits.
+            As a warmup for the next section, I will show that $D(M)\leq \rk(M)+1$ for any Boolean matrix $M$, where $D(M)$ is the deterministic communication complexity of $M$. The main idea is to show that $M$ can have at most $2^{\rk(M)}$ distinct columns, hence we can design a communication protocol by encoding the distinct columns with $\log_2 2^{\rk(M)}=\rk(M)$ bits and compute the function using $\rk(M)+1$ bits.
         </p>
         <p>
-            We now proceed to show that a rank $r$ Boolean matrix $M$ can have at most $r$ distinct columns (and rows).
+            We now proceed to show that a rank $r$ Boolean matrix $M$ can have at most $2^r$ distinct columns (and rows).
         </p>
         <details open>
             <summary>Proof</summary>
@@ -57,7 +57,7 @@
                 We show this by double counting. Put all elements of $S$ in a matrix $N$, and let $P$ be a $|S|\times 2^{|S|}$ Boolean matrix where all columns are distinct. Then $N\cdot P$ is a matrix whose columns are all distinct subset sums of $S$.
             </p>
             <p>
-                Now factor matrix $N$ into $N=C\cdot R$, where $R$ consists of $\rk(M)$ linearly independent rows of $S$. Now $N\cdot P=C\cdot (R\cdot P)$. Notice that $R\cdot P$ is a $\rk(M)\times 2^{|S|}$ matrix, with entries in $\{0,1,\dots,|S|\}$. Therefore it has at most $(1+|S|)^{\rk(M)}$ distinct columns. Since $C$ is injective, $C\cdot (R\cdot P)$ has at most $(1+|S|)^{\rk(M)}$ distinct columns, which means that
+                Now factor matrix $N$ into $N=C\cdot R$, where $R$ consists of $\rk(M)$ linearly independent rows of $N$. Now $N\cdot P=C\cdot (R\cdot P)$. Notice that $R\cdot P$ is a $\rk(M)\times 2^{|S|}$ matrix, with entries in $\{0,1,\dots,|S|\}$. Therefore it has at most $(1+|S|)^{\rk(M)}$ distinct columns. Since $C$ is injective, $C\cdot (R\cdot P)$ has at most $(1+|S|)^{\rk(M)}$ distinct columns, which means that
                 $$2^{|S|}\leq (1+|S|)^{\rk(M)},$$
                 and rearranging gives
                 $$|S|\leq O(\rk(M)\log \rk(M)),$$
@@ -74,12 +74,10 @@
         <p>
             From these two claims, it's now easy to see that $M$ can be written as a $\pm 1$ linear combination of at most $O(\rk(M)\log \rk(M))$ rank $1$ Boolean matrices.
         </p>
-        <p>
-            
-        </p>
+        
         <h3>Non-deterministic Rank</h3>
         <p>
-            Let $M$ be an $n\times m$ Boolean matrix over $\RR$. We say that a matrix $A$ is a non-deterministic representation (or support-represention) of $M$ if $M_{ij}=1\Leftrightarrow A_{ij}\neq 0$. Define the <strong>non-deterministic rank</strong> of $M$, denoted $\nrk(M)$, as the minimum rank over all non-deterministic representations of $M$. This notion has been studied in quantum communication complexity (see <a href="https://arxiv.org/abs/cs/0001014">this</a>), where $\nrk(M)$ is related to non-deterministic quantum communication complexity through the following tight connection:
+            Let $M$ be an $n\times m$ Boolean matrix over $\RR$. We say that a matrix $A$ is a non-deterministic representation (or support-representation) of $M$ if $M_{ij}=1\Leftrightarrow A_{ij}\neq 0$. Define the <strong>non-deterministic rank</strong> of $M$, denoted $\nrk(M)$, as the minimum rank over all non-deterministic representations of $M$. This notion has been studied in quantum communication complexity (see <a href="https://arxiv.org/abs/cs/0001014">this</a>), where $\nrk(M)$ is related to non-deterministic quantum communication complexity through the following tight connection:
             $$NQcc(M)=\lfloor \log \nrk(M)\rfloor+1,$$
             where $NQcc(M)$ is the non-deterministic quantum communication complexity.
         </p>
@@ -101,12 +99,12 @@
         </p>
         <h3>Rational Rank</h3>
         <p>
-            Motivated by rational degree of Boolean functions, where $\rdeg(f)=\max\{\ndeg(f),\ndeg(\neg f)\}$, we can defined the <strong>rational rank</strong> of $M$ as $\rrk(M)=\max\{\nrk(M),\nrk(\neg M)\}$. Some natural question about this notion is, whether $\rrk(M)$ is polynomially or quasi-polynomially related to $\rk(M)$. Notice that since $|\rk(M)-\rk(\neg M)|\leq 1$, this question is the same as asking the relation between $\rrk(\neg M)$ and $\rk(\neg M)$. I do not have any immediate counterexample for this question. Another question is whether this relates to any computational complexity measures.
+            Motivated by rational degree of Boolean functions, where $\rdeg(f)=\max\{\ndeg(f),\ndeg(\neg f)\}$, we can define the <strong>rational rank</strong> of $M$ as $\rrk(M)=\max\{\nrk(M),\nrk(\neg M)\}$. Some natural question about this notion are whether $\rrk(M)$ is polynomially or quasi-polynomially related to $\rk(M)$. Notice that since $|\rk(M)-\rk(\neg M)|\leq 1$, this question is the same as asking the relation between $\rrk(\neg M)$ and $\rk(\neg M)$. I do not have any immediate counterexample for this question. Another question is whether this relates to any computational complexity measures.
         </p>
         <p>
             Something that I currently can show is that
             $$\max(\nrk(M),\nrk(\neg M))\geq \Omega(\log \rk(M)).$$
-            This follows from lemma 3.6 of <a href="https://eccc.weizmann.ac.il/report/2021/066/">this paper</a> that $M$ contains at least one of $M$ must contains a submatrix equal to one of $I_k, \neg I_k, GT_k, \neg GT_k$ for $k=\Omega(\log \rk(M))$, where $GT_k$ is the upper triangular Boolean matrix on $k$ variables. This is very similar to the claim that all Boolean functions that depends on $n$ variables restricts to a non-trivial symmetric function on $\log^*(n)$ number of variables. Notice that all $4$ of these matrices have rational rank at least $k$, so the inequality follows.
+            This follows from lemma 3.6 of <a href="https://eccc.weizmann.ac.il/report/2021/066/">this paper</a> that $M$ must contain a submatrix equal to one of $I_k, \neg I_k, GT_k, \neg GT_k$ for $k=\Omega(\log \rk(M))$, where $GT_k$ is the upper triangular Boolean matrix on $k$ variables. This is very similar to the claim that all Boolean functions depending on $n$ variables must restrict to a non-trivial symmetric function on $\log^*(n)$ number of variables (this is iterated logarithm). Notice that all $4$ of these matrices have rational rank at least $k$, so the inequality follows.
         </p>
     </div>
 </body>
