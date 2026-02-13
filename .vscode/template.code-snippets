@@ -49,14 +49,5 @@
         "",
         "</html>"
         ]
-    },
-    "Blog Paragraph Block": {
-        "prefix": ["blogp", "blog-paragraph"],
-        "description": "A blog paragraph with an indented cursor line",
-        "body": [
-        "<p>",
-        "    ${1}",
-        "</p>"
-        ]
     }
 }

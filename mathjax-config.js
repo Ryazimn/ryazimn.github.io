@@ -18,7 +18,9 @@ window.MathJax = {
             nrk: "{\\mathrm{nrk}}",
             rrk: "\\mathrm{rrk}",
             srr: "\\mathrm{srr}",
-            rk: "{\\mathrm{rk}}"
+            rk: "{\\mathrm{rk}}",
+            PostR: "{\\mathrm{PostR}}",
+            PostQ: "{\\mathrm{PostQ}}"
         }
     },
     svg: {

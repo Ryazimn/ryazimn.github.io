@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html>
+    
+<head>
+    <title>Blog</title>
+    <meta charset="UTF-8">
+    <link href="../../styles.css" rel="stylesheet" type="text/css"/>
+    <script src="../../mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <address>
+            <a href="../../index.html">Home</a>
+            <hr>
+        </address>
+        <p><i>February 13, 2026</i></p>
+        <h2>Notes on Certificate Complexity, Quantum and Classical</h2>
+        <p>
+            Let $f\colon \{0,1\}^n \to \{0,1\}$ be a Boolean function. For $x\in \{0,1\}^n$, the <strong>local certificate complexity</strong> at $x$, denoted $C(f,x)$, is usually defined as the minimum number of variables of $x$ to reveal to convince the verifier the output of the function on this input. For example, consider the $\OR_n(x_1,\dots,x_n)=x_1\vee \cdots \vee x_n$ function, and the input $x=10\dots0$. Then it suffices to reveal $x_1=1$ to convince the verifier that $\OR_n(x)=1$. However, for $x=00\dots 0$, all inputs must be revealed. The <strong>certificate complexity</strong> of $f$, denoted $C(f)$, is defined as $\max_{x\in \{0,1\}} C(f,x)$.
+        </p>
+        <p>
+            In this article, I will discuss some alternative characterizations of the certificate complexity, and how to make generalizations from these alternative characterizations.
+        </p>
+        <h3>Algorithmic Characterization</h3>
+        <p>
+            We can alternatively define the local certificate complexity $C(f,x)$ as the deterministic query complexity of a partial function that accepts $x$, and rejects $y$ for any $y$ such that $f(x)\neq f(y)$. Let's prove that these two characterizations are equivalent.
+        </p>
+        <details>
+            <summary>Proof</summary>
+            <p>
+                Let $c$ be the local certificate complexity of $f$ at $x$ in the first definition. We consider the deterministic decision tree of depth $c$ defined as a perfect binary tree that queries only the variables in the certificate, and output $1$ only when the variables match $x$. This will reject any $y$ with $f(x)\neq f(y)$ with certainty, because such $y$ must differ from $x$ on at least one variable in the certificate.
+            </p>
+            <p>
+                Now suppose there is a decision tree of depth $d$ that accepts $x$ and rejects any $y$ with $f(x)\neq f(y)$. Then it's easy to see that the variables on the path where $x$ is queried must form a certificate for $x$. This shows that $C(f,x)\leq d$, as desired.
+            </p>
+        </details>
+        
+        <p>
+            From this perspective, we can define quantum analogue of the certificate complexity. Let the local quantum query complexity of $f$ at $x$, denoted $QC(f,x)$, the quantum query complexity of a partial function that accepts $x$ with probability $1$, and rejects any $y$ for $f(y)\neq f(x)$ with probability $1$ (one can also define a bounded error version of quantum certificate complexity, see this <a href="http://www.scottaaronson.com/papers/certif.pdf">paper</a> by Scott Aaronson). The <strong>quantum certificate complexity</strong> of $f$, denoted $QC(f)$, is defined as $\max_{x\in \{0,1\}^n} QC(f,x)$.
+        </p>
+        <p>
+            Using the <a href="https://arxiv.org/abs/quant-ph/9802049">polynomial method</a>, we can observe the following relations: $\mathrm{PostQ}_E(f)=\rdeg(f)\leq QC(f)\leq C(f)$. It is currently unclear to me whether $\rdeg(f)=\Theta(QC(f))$ could hold? The motivation for this belief will be discussed in the next section.
+        </p>
+        <h3>Post-selected Classical Query Complexity</h3>
+        <p>
+            This section will be based on Chris W Cade's <a href="https://research-information.bris.ac.uk/en/studentTheses/quantum-algorithms-and-complexity-in-non-standard-models/">thesis</a>.
+        </p>
+        <p>
+            A classical post-selected query algorithm $\mathcal A$ is defined as a probability distribution over decision trees that outputs $0,1,\perp$. For a Boolean function $f\colon \{0,1\}^n \to \{0,1\}$, we require that
+            $$\Pr[\mathcal{A}(x)=f(x)\mid \mathcal{A}(x)\neq \perp]\geq 1-\varepsilon,\ \Pr[\mathcal{A}(x)\neq \perp]>0,$$
+            for fixed $\varepsilon \in [0,1/2)$. Define $\PostR_{\varepsilon}(f)$ as the minimum query complexity over all classical post-selected query algorithms that computes $f$. In particular, if $\varepsilon=0$, we denote it by $\PostR_E(f)$.
+        </p>
+        <p>
+            Exact classical post-selected query complexity is completely characterized by the certificate complexity, i.e., $\PostR_E(f)=C(f)$. A consequence of this is that $\PostR_E$ satisfies the composition property $\PostR_E(f\circ g)\leq \PostR_E(f)\cdot \PostR_E(g)$. It would be interesting to know if $\PostQ_E(f\circ g)\leq O(\PostQ_E(f)\cdot \PostQ_E(g))$ holds. Note that the function composition is on disjoint blocks of variables. An intermediate question to answer may be whether the quantum certificate complexity satisfies $QC(f\circ g)\leq O(QC(f)\cdot QC(g))$.
+        </p>
+        <p>
+            Something that immediately follows from the recent result on the rational degree conjecture is $\PostQ_E(f\circ g)\leq O(\PostQ_E(f)\cdot \PostQ_E(g)^4)$. This is because $\PostQ_E(g)=\rdeg(g)\leq \deg(g)\leq O(\rdeg(f)^4)$, and composing a rational representation of $f$ with a polynomial representation of $g$ immediately gives a rational representation of $f\circ g$ with rational degree at most $\rdeg(f)\cdot \deg(g)\leq \rdeg(f)\cdot O(\rdeg(g)^4)$.
+        </p>
+    </div>
+</body>
+
+</html>
