@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html>
+    
+<head>
+    <title>Blog</title>
+    <meta charset="UTF-8">
+    <link href="../../styles.css" rel="stylesheet" type="text/css"/>
+    <script src="../../mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <address>
+            <a href="../../index.html">Home</a>
+            <hr>
+        </address>
+        <p><i>Month Date, Year</i></p>
+        <h2>Some Random Thoughts</h2>
+        <h3>Convex Hull Complexity Lower Bound</h3>
+        <p>
+            From undergraduate algorithms course, we learned that sorting $n$ elements in the comparison model requires $\Omega(n\log n)$ comparisons. Later, we learned that using this lower bound, we can prove an $\Omega(n\log n)$ lower bound for the convex hull problem in computational geometry, where given an unordered set of $n$ points in $\RR^2$, construct the convex hull of this set of points.
+        </p>
+        <p>
+            This is often proved by reducing from the sorting problem. By mapping $x_i\mapsto (x_i,x_i^2)\in \RR^2$, the convex hull must return the list in some cyclic shift of the sorted order. Therefore any convex hull algorithm must have $\Omega(n\log n)$ time complexity. This proof was not satisfactory to me, because it does not work if we only want to determine the vertices on the convex hull.
+        </p>
+        <p>
+            Consider the weaker problem of computing the number of points on the convex hull.
+        </p>
+        <!-- Also discuss and understand the Ben-Or algebraic decision tree lower bound proof -->
+        <h3>Game Theory and Randomness</h3>
+        <p>
+            
+        </p>
+        
+    </div>
+</body>
+
+</html>

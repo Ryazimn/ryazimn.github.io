@@ -41,14 +41,14 @@
         </details>
         
         <p>
-            From this perspective, we can define quantum analogue of the certificate complexity. Let the local quantum query complexity of $f$ at $x$, denoted $QC(f,x)$, the quantum query complexity of a partial function that accepts $x$ with probability $1$, and rejects any $y$ for $f(y)\neq f(x)$ with probability $1$ (one can also define a bounded error version of quantum certificate complexity, see this <a href="http://www.scottaaronson.com/papers/certif.pdf">paper</a> by Scott Aaronson). The <strong>quantum certificate complexity</strong> of $f$, denoted $QC(f)$, is defined as $\max_{x\in \{0,1\}^n} QC(f,x)$.
+            From this perspective, we can define quantum analogue of the certificate complexity. Let the local quantum query complexity of $f$ at $x$, denoted $QC(f,x)$, be the quantum query complexity of a partial function that accepts $x$ with probability $1$, and rejects any $y$ for $f(y)\neq f(x)$ with probability $1$ (one can also define a bounded error version of quantum certificate complexity, see this <a href="http://www.scottaaronson.com/papers/certif.pdf">paper</a> by Scott Aaronson). The <strong>quantum certificate complexity</strong> of $f$, denoted $QC(f)$, is defined as $\max_{x\in \{0,1\}^n} QC(f,x)$.
         </p>
         <p>
-            Using the <a href="https://arxiv.org/abs/quant-ph/9802049">polynomial method</a>, we can observe the following relations: $\mathrm{PostQ}_E(f)=\rdeg(f)\leq QC(f)\leq C(f)$. It is currently unclear to me whether $\rdeg(f)=\Theta(QC(f))$ could hold? The motivation for this belief will be discussed in the next section.
+            Using the <a href="https://arxiv.org/abs/quant-ph/9802049">polynomial method</a>, we can observe the following relations: $\mathrm{PostQ}_E(f)=\rdeg(f)\leq QC(f)\leq C(f)$. It is currently unclear to me whether $\rdeg(f)=\Theta(QC(f))$ could hold? The motivation for this conjecture will be discussed in the next section.
         </p>
         <h3>Post-selected Classical Query Complexity</h3>
         <p>
-            This section will be based on Chris W Cade's <a href="https://research-information.bris.ac.uk/en/studentTheses/quantum-algorithms-and-complexity-in-non-standard-models/">thesis</a>.
+            This section is based on <a href="https://research-information.bris.ac.uk/en/studentTheses/quantum-algorithms-and-complexity-in-non-standard-models/">Cade's thesis</a>.
         </p>
         <p>
             A classical post-selected query algorithm $\mathcal A$ is defined as a probability distribution over decision trees that outputs $0,1,\perp$. For a Boolean function $f\colon \{0,1\}^n \to \{0,1\}$, we require that
@@ -56,10 +56,20 @@
             for fixed $\varepsilon \in [0,1/2)$. Define $\PostR_{\varepsilon}(f)$ as the minimum query complexity over all classical post-selected query algorithms that computes $f$. In particular, if $\varepsilon=0$, we denote it by $\PostR_E(f)$.
         </p>
         <p>
-            Exact classical post-selected query complexity is completely characterized by the certificate complexity, i.e., $\PostR_E(f)=C(f)$. A consequence of this is that $\PostR_E$ satisfies the composition property $\PostR_E(f\circ g)\leq \PostR_E(f)\cdot \PostR_E(g)$. It would be interesting to know if $\PostQ_E(f\circ g)\leq O(\PostQ_E(f)\cdot \PostQ_E(g))$ holds. Note that the function composition is on disjoint blocks of variables. An intermediate question to answer may be whether the quantum certificate complexity satisfies $QC(f\circ g)\leq O(QC(f)\cdot QC(g))$.
+            Exact classical post-selected query complexity is completely characterized by the certificate complexity, i.e., 
+            $$\PostR_E(f)=C(f).$$
+            A consequence of this is that $\PostR_E$ satisfies the composition property
+            $$\PostR_E(f\circ g)\leq \PostR_E(f)\cdot \PostR_E(g).$$
+            It would be interesting to know if the composition holds:
+            $$\PostQ_E(f\circ g)\leq O(\PostQ_E(f)\cdot \PostQ_E(g)).$$
+            Note that the function composition is on disjoint blocks of variables. An intermediate question to answer may be whether the quantum certificate complexity satisfies $QC(f\circ g)\leq O(QC(f)\cdot QC(g))$.
         </p>
         <p>
-            Something that immediately follows from the recent result on the rational degree conjecture is $\PostQ_E(f\circ g)\leq O(\PostQ_E(f)\cdot \PostQ_E(g)^4)$. This is because $\PostQ_E(g)=\rdeg(g)\leq \deg(g)\leq O(\rdeg(f)^4)$, and composing a rational representation of $f$ with a polynomial representation of $g$ immediately gives a rational representation of $f\circ g$ with rational degree at most $\rdeg(f)\cdot \deg(g)\leq \rdeg(f)\cdot O(\rdeg(g)^4)$.
+            Something that immediately follows from the recent result on the rational degree conjecture is
+            $$\PostQ_E(f\circ g)\leq O(\PostQ_E(f)\cdot \PostQ_E(g)^4).$$
+            This is because
+            $$\PostQ_E(g)=\rdeg(g)\leq \deg(g)\leq O(\rdeg(f)^4),$$
+            and composing a rational representation of $f$ with a polynomial representation of $g$ immediately gives a rational representation of $f\circ g$ with rational degree at most $\rdeg(f)\cdot \deg(g)\leq \rdeg(f)\cdot O(\rdeg(g)^4)$.
         </p>
     </div>
 </body>
