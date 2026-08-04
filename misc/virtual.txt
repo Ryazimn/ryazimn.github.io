@@ -1,0 +1,57 @@
+<h2>Virtual Contest</h2>
+<center>
+<table style="text-align: center">
+    <tbody>
+        <tr>
+            <th>Date</th>
+            <th>Contest</th>
+            <th><a href="https://codeforces.com/blog/entry/66909?#comment-510144">Performance</a></th>
+        </tr>
+        <tr>
+            <td>?</td>
+            <td><a href="https://codeforces.com/contest/1863">Pinely Round 2 (Div. 1 + Div. 2)</a></td>
+            <td>?</td>
+        </tr>
+        <tr>
+            <td>04/11/2026</td>
+            <td><a href="https://codeforces.com/contest/2211">Nebius Round 2 (Div. 1 + Div. 2)</a></td>
+            <td>2583</td>
+        </tr>
+        <tr>
+            <td>09/11/2025</td>
+            <td><a href="https://codeforces.com/contest/2115">Codeforces Round 1028 (Div. 1)</a></td>
+            <td>2425</td>
+        </tr>
+        <tr>
+            <td>08/09/2025</td>
+            <td><a href="https://codeforces.com/contest/1718">Codeforces Round 814 (Div. 1)</a></td>
+            <td>2650</td>
+        </tr>
+        <tr>
+            <td>08/04/2025</td>
+            <td><a href="https://codeforces.com/contest/2046">Codeforces Round 990 (Div. 1)</a></td>
+            <td>2374</td>
+        </tr>
+        <tr>
+            <td>08/02/2025</td>
+            <td><a href="https://codeforces.com/contest/2124">Codeforces Round 1036 (Div. 1 + Div. 2)</a></td>
+            <td>2515</td>
+        </tr>
+        <tr>
+            <td>07/31/2025</td>
+            <td><a href="https://codeforces.com/contest/1965">Codeforces Round 941 (Div. 1)</a></td>
+            <td>2436</td>
+        </tr>
+        <tr>
+            <td>07/21/2025</td>
+            <td><a href="https://codeforces.com/contest/2077">Codeforces Round 1008 (Div. 1)</a></td>
+            <td>2550</td>
+        </tr>
+        <tr>
+            <td>07/13/2025</td>
+            <td><a href="https://codeforces.com/contest/2101">Codeforces Round 1024 (Div. 1)</a></td>
+            <td>2437</td>
+        </tr>
+    </tbody>
+</table>
+</center>

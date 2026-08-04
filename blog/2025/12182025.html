@@ -32,7 +32,7 @@
             for some $c_k\in \RR$. The goal is to determine if this is satisfiable, and if it is, compute any satisfiable assignment.
         </p>
         <p>
-            This is a specific instance of Linear-Programming problem, which in general is hard. Similar to how 2-SAT has a polynomial time algorithm, yet 3-SAT is NP-complete, one would expect this can be efficiently solved. The idea is similar to how 2-SAT is solved, by considering some associated graph. For the above instance, we can construct a graph $G$ on $n+1$ vertices and $m+n$ directed weighted edges:
+            Although this is an instance of linear programming, this special form has a much simpler graph theoretic algorithm. The idea is similar to how 2-SAT is solved, by considering some associated graph. For the above instance, we can construct a graph $G$ on $n+1$ vertices and $m+n$ directed weighted edges:
             $$(j_1\to i_1,c_1),(j_2\to i_2,c_2),\dots,(j_m\to i_m,c_m),(0\to 1,0),\dots,(0\to n,0).$$
             Then run single source shortest path from vertex $0$.
         </p>

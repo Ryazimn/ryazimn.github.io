@@ -21,7 +21,7 @@
         <p><i>February 13, 2026</i></p>
         <h2>Notes on Certificate Complexity, Quantum and Classical</h2>
         <p>
-            Let $f\colon \{0,1\}^n \to \{0,1\}$ be a Boolean function. For $x\in \{0,1\}^n$, the <strong>local certificate complexity</strong> at $x$, denoted $C(f,x)$, is usually defined as the minimum number of variables of $x$ to reveal to convince the verifier the output of the function on this input. For example, consider the $\OR_n(x_1,\dots,x_n)=x_1\vee \cdots \vee x_n$ function, and the input $x=10\dots0$. Then it suffices to reveal $x_1=1$ to convince the verifier that $\OR_n(x)=1$. However, for $x=00\dots 0$, all inputs must be revealed. The <strong>certificate complexity</strong> of $f$, denoted $C(f)$, is defined as $\max_{x\in \{0,1\}} C(f,x)$.
+            Let $f\colon \{0,1\}^n \to \{0,1\}$ be a Boolean function. For $x\in \{0,1\}^n$, the <strong>local certificate complexity</strong> at $x$, denoted $C(f,x)$, is usually defined as the minimum number of variables of $x$ to reveal to convince the verifier the output of the function on this input. For example, consider the $\OR_n(x_1,\dots,x_n)=x_1\vee \cdots \vee x_n$ function, and the input $x=10\dots0$. Then it suffices to reveal $x_1=1$ to convince the verifier that $\OR_n(x)=1$. However, for $x=00\dots 0$, all inputs must be revealed. The <strong>certificate complexity</strong> of $f$, denoted $C(f)$, is defined as $\max_{x\in \{0,1\}^2} C(f,x)$.
         </p>
         <p>
             In this article, I will discuss some alternative characterizations of the certificate complexity, and how to make generalizations from these alternative characterizations.
@@ -68,7 +68,7 @@
             Something that immediately follows from the recent result on the rational degree conjecture is
             $$\PostQ_E(f\circ g)\leq O(\PostQ_E(f)\cdot \PostQ_E(g)^4).$$
             This is because
-            $$\PostQ_E(g)=\rdeg(g)\leq \deg(g)\leq O(\rdeg(f)^4),$$
+            $$\PostQ_E(g)=\rdeg(g)\leq \deg(g)\leq O(\rdeg(g)^4),$$
             and composing a rational representation of $f$ with a polynomial representation of $g$ immediately gives a rational representation of $f\circ g$ with rational degree at most $\rdeg(f)\cdot \deg(g)\leq \rdeg(f)\cdot O(\rdeg(g)^4)$.
         </p>
     </div>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html>
+    
+<head>
+    <title>Blog</title>
+    <meta charset="UTF-8">
+    <link href="../../styles.css" rel="stylesheet" type="text/css"/>
+    <script src="../../mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <address>
+            <a href="../../index.html">Home</a>
+            <hr>
+        </address>
+        <p><i>June 16, 2026</i></p>
+        <h2>Minus Signs in Computer Science</h2>
+        <p>
+            In this note, I will talk about the computational power of minus signs $``-''$ that I observed in theoretical computer science and some related thoughts.
+        </p>
+        <h3>Boolean Circuits</h3>
+        <p>
+            <!-- negation propagation. This question first arose when watching Ryan O'Donnell's CS Theory Toolkit videos -->
+            I have heard multiple times that when thinking about a Boolean circuit, we can ignore the negation gate and just put the negated variables as inputs. This at first glance is correct because we can just apply De Morgan's law repeatedly and propagate down all negations to the input variables. However, it recently occurred to me that things are not this simple. Naively propagating down the negations could in some cases increase the size of the circuit exponentially! For example, consider the following:
+        </p>
+        <!-- Insert a figure (or tikz?) -->
+         
+        <p>
+            But after more careful thoughts, we can make this work up to constant factors.
+        </p>
+        <p>
+            This is what motivated me to write this blog.
+        </p>
+        <h4>Razborov's Monotone</h4>
+        <p>
+            
+        </p>
+        <h3>Quantum Computing</h3>
+        <p>
+            
+            <!-- Probabilistic computation with minus signs -->
+        </p>
+        <h3>Communication Complexity</h3>
+        <p>
+            <!-- Log-rank and signed rectangle rank -->
+        </p>
+    </div>
+</body>
+
+</html>
